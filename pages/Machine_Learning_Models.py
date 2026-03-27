@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import joblib
 
-st.title("ML Prediction (Heart Disease)")
+st.title("Machine_Learning (Heart Disease)")
 
 model = joblib.load('models/heart_model.pkl')
 
