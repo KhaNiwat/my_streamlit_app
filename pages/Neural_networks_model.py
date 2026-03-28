@@ -5,7 +5,7 @@ import numpy as np
 import pickle
 from sklearn.preprocessing import StandardScaler
 
-st.title("Neural Network Prediction (Titanic)")
+st.title("Neural Network (Titanic)")
 
 @st.cache_data
 def prepare_scaler():
@@ -77,7 +77,7 @@ with col2:
     parch = st.number_input("พ่อแม่/ลูกที่อยู่บนเรือ (Parch)", min_value=0, max_value=10, value=0)
     fare = st.number_input("ค่าโดยสาร (Passenger Fare ($))", min_value=0.0, max_value=600.0, value=32.0)
 
-if st.button("ทำนายอัตราการรอดชีวิต (NN)"):
+if st.button("ทำนาย"):
     # แปลงข้อมูลรับเข้า (Inputs)
     sex_val = 1 if sex == "Male" else 0
     embarked_c = 1 if embarked.startswith("C") else 0
