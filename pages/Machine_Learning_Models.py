@@ -41,6 +41,6 @@ if st.button("ทำนาย"):
     st.markdown("---")
     st.subheader("Prediction Result:")
     if prediction[0] == 1:
-        st.error("มีความเสี่ยงเป็นโรคหัวใจ (Class 1)")
+        st.error("มีความเสี่ยงเป็นโรคหัวใจ")
     else:
-        st.success("ไม่มีความเสี่ยง (Class 0)")
+        st.success("ไม่มีความเสี่ยง")
