@@ -142,9 +142,6 @@ st.markdown("""
 | แหล่งอ้างอิง | ลิงก์ |
 |-------------|------|
 |  Kaggle Titanic - Machine Learning from Disaster | [kaggle.com/c/titanic](https://www.kaggle.com/c/titanic) |
-|  TensorFlow Documentation | [tensorflow.org/api_docs](https://www.tensorflow.org/api_docs) |
-|  scikit-learn Documentation | [scikit-learn.org/stable/documentation.html](https://scikit-learn.org/stable/documentation.html) |
-|  Pandas Documentation | [pandas.pydata.org/docs](https://pandas.pydata.org/docs/) |
 |  Dataset | Yasser H. *Titanic Dataset* — [Kaggle](https://www.kaggle.com/datasets/yasserh/titanic-dataset) |
 """)
 

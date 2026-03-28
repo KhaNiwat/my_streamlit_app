@@ -143,8 +143,6 @@ st.subheader("6. แหล่งอ้างอิง (References)")
 st.markdown("""
 | แหล่งอ้างอิง | ลิงก์ |
 |-------------|------|
-| Scikit-learn Documentation | [scikit-learn.org](https://scikit-learn.org/) |
-| Pandas Library | [pandas.pydata.org](https://pandas.pydata.org/) |
 |  UCI ML Repository / Kaggle | Machine Learning Concepts & Heart Disease Dataset |
 | Dataset | `heart_dataset.csv` (สร้างขึ้นจาก ChatGPT) |
 """)
