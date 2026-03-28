@@ -2,7 +2,7 @@ import os
 import streamlit as st
 import pandas as pd
 import numpy as np
-import tensorflow as tf
+import pickle
 from sklearn.preprocessing import StandardScaler
 
 st.title("Neural Network Prediction (Titanic)")
@@ -38,10 +38,29 @@ def prepare_scaler():
 # โหลด Scaler จาก Data ต้นฉบับ
 scaler, feature_names = prepare_scaler()
 
-# โหลดโมเดล (อ่านไฟล์ .h5)
+# โหลดโมเดล (อ่านค่าน้ำหนักจากไฟล์ .pkl เพื่อลดขนาด dependency ไม่ต้องใช้ TensorFlow)
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-model_path = os.path.join(base_dir, 'models', 'titanic_model.h5')
-model = tf.keras.models.load_model(model_path)
+weights_path = os.path.join(base_dir, 'models', 'titanic_weights.pkl')
+with open(weights_path, 'rb') as f:
+    nn_weights = pickle.load(f)
+
+def relu(x):
+    return np.maximum(0, x)
+
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+def predict_nn(X, weights):
+    # Layer 1
+    z1 = np.dot(X, weights[0]['W']) + weights[0]['b']
+    a1 = relu(z1)
+    # Layer 2
+    z2 = np.dot(a1, weights[1]['W']) + weights[1]['b']
+    a2 = relu(z2)
+    # Layer 3
+    z3 = np.dot(a2, weights[2]['W']) + weights[2]['b']
+    a3 = sigmoid(z3)
+    return a3
 
 st.write("กรุณากรอกข้อมูลผู้โดยสารเพื่อประเมินโอกาสรอดชีวิตจากเหตุการณ์ไททานิก")
 
@@ -73,8 +92,8 @@ if st.button("ทำนายอัตราการรอดชีวิต (N
     # แปลงสเกล
     scaled_input = scaler.transform(input_data)
     
-    # ทำนายผล
-    prediction = model.predict(scaled_input)
+    # ทำนายผลด้วย Numpy (ช่วยให้แอปทำงานได้เร็วมากและไม่ต้องพึ่ง TensorFlow)
+    prediction = predict_nn(scaled_input, nn_weights)
     prob = float(prediction[0][0])
     
     st.markdown("---")
