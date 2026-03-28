@@ -63,14 +63,16 @@ st.divider()
 st.header("ผู้จัดทำ (About Us)")
 col_a, col_b = st.columns(2)
 
-st.markdown("""
+with col_a:
+    st.markdown("""
 **จัดทำโดย:**
 - **นายนิวัฒน์ เสียงใส**
 - รหัสนักศึกษา: 6404062610294
 - โครงการพิเศษ (DE-RA) ชั้นปีที่ 5
 """)
 
-st.markdown("""
+with col_b:
+    st.markdown("""
 **อาจารย์ผู้สอนและที่ปรึกษา:**
 - ดร.ณัฐกิตติ์ จิตรเอื้อตระกูล (NJR)
 - ดร.ธรรศฏภณ สุระศักดิ์ (TSR)
