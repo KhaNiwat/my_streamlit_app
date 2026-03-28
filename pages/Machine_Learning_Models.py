@@ -5,7 +5,7 @@ import joblib
 
 st.title("Machine_Learning (Heart Disease)")
 
-model = joblib.load('models/heart_model.pkl')
+model = joblib.load('heart_model.pkl')
 
 st.write("กรุณากรอกข้อมูลสุขภาพเพื่อทำนายความเสี่ยงโรคหัวใจ")
 

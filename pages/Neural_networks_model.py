@@ -40,7 +40,7 @@ scaler, feature_names = prepare_scaler()
 
 # โหลดโมเดล (อ่านค่าน้ำหนักจากไฟล์ .pkl เพื่อลดขนาด dependency ไม่ต้องใช้ TensorFlow)
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-weights_path = os.path.join(base_dir, 'models', 'titanic_weights.pkl')
+weights_path = os.path.join(base_dir, 'titanic_weights.pkl')
 with open(weights_path, 'rb') as f:
     nn_weights = pickle.load(f)
 
