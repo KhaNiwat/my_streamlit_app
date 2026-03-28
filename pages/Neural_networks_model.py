@@ -40,7 +40,7 @@ scaler, feature_names = prepare_scaler()
 
 # โหลดโมเดล (อ่านไฟล์ .h5)
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-model_path = os.path.join(base_dir, 'models', 'titanic_nn_model.h5')
+model_path = os.path.join(base_dir, 'models', 'titanic_model.h5')
 model = tf.keras.models.load_model(model_path)
 
 st.write("กรุณากรอกข้อมูลผู้โดยสารเพื่อประเมินโอกาสรอดชีวิตจากเหตุการณ์ไททานิก")

@@ -2,13 +2,13 @@ import streamlit as st
 
 st.set_page_config(page_title="Machine Learning Model", layout="wide")
 
-st.title("🤖 Machine Learning (Ensemble) Model")
+st.title(" Machine Learning (Ensemble) Model")
 st.markdown("---")
 
 
-st.header("❤️ Heart Disease Prediction")
+st.header("Heart Disease Prediction")
 
-# 1. Dataset
+
 st.subheader("1. รายละเอียดของ Dataset")
 st.write(
     "Dataset ที่ใช้เป็นข้อมูลสุขภาพของผู้ป่วยจำนวน **500 ราย** "
@@ -37,12 +37,12 @@ with col2:
 | **1** | เป็นโรคหัวใจ |
 | **0** | ไม่เป็นโรคหัวใจ |
 
-> 📁 Dataset: `heart_dataset.csv` (สร้างขึ้นจาก ChatGPT / UCI ML Repository concept)
+> Dataset: `heart_dataset.csv`
 """)
 
 st.markdown("---")
 
-# 2. Data Preparation
+
 st.subheader("2. ขั้นตอน Data Preparation")
 st.markdown("""
 | ขั้นตอน | รายละเอียด |
@@ -55,7 +55,7 @@ st.markdown("""
 
 st.markdown("---")
 
-# 3. Ensemble Concept
+
 st.subheader("3. แนวคิดของ Ensemble Model")
 
 col3, col4 = st.columns([2, 1])
@@ -72,19 +72,19 @@ with col4:
     st.info("""
 **Voting Types:**
 - 🔵 **Hard Voting**: โหวตโดยตรงจากผล Class
-- 🟢 **Soft Voting**: เฉลี่ย Probability (ใช้ในโปรเจกต์นี้)
+- 🟢 **Soft Voting**: เฉลี่ย Probability 
 """)
 
 st.markdown("---")
 
-# 4. Models Used
+
 st.subheader("4. โมเดลที่ใช้พัฒนา (อย่างน้อย 3 ตัว)")
 
 col5, col6, col7 = st.columns(3)
 
 with col5:
     st.markdown("""
-### 📊 Logistic Regression
+### Logistic Regression
 โมเดลพื้นฐานสำหรับการจำแนกประเภทเชิงเส้น
 
 **พารามิเตอร์:**
@@ -96,7 +96,7 @@ with col5:
 
 with col6:
     st.markdown("""
-### 🌲 Random Forest
+### Random Forest
 โมเดลแบบ Ensemble (Bagging) ที่ใช้ Decision Trees หลายต้น
 
 **พารามิเตอร์:**
@@ -108,7 +108,7 @@ with col6:
 
 with col7:
     st.markdown("""
-### 🚀 Gradient Boosting
+###  Gradient Boosting
 โมเดลแบบ Ensemble (Boosting) ที่สร้างโมเดลใหม่เพื่อแก้ข้อผิดพลาดก่อนหน้า
 
 **พารามิเตอร์:**
@@ -121,7 +121,7 @@ with col7:
 
 st.markdown("---")
 
-# 5. Development Steps
+
 st.subheader("5. ขั้นตอนการพัฒนาโมเดล")
 
 steps = {
@@ -138,16 +138,16 @@ for step, desc in steps.items():
 
 st.markdown("---")
 
-# 6. References
+
 st.subheader("6. แหล่งอ้างอิง (References)")
 st.markdown("""
 | แหล่งอ้างอิง | ลิงก์ |
 |-------------|------|
-| 📚 Scikit-learn Documentation | [scikit-learn.org](https://scikit-learn.org/) |
-| 📊 Pandas Library | [pandas.pydata.org](https://pandas.pydata.org/) |
-| 🔬 UCI ML Repository / Kaggle | Machine Learning Concepts & Heart Disease Dataset |
-| 🤖 Dataset | `heart_dataset.csv` (สร้างขึ้นจาก ChatGPT) |
+| Scikit-learn Documentation | [scikit-learn.org](https://scikit-learn.org/) |
+| Pandas Library | [pandas.pydata.org](https://pandas.pydata.org/) |
+|  UCI ML Repository / Kaggle | Machine Learning Concepts & Heart Disease Dataset |
+| Dataset | `heart_dataset.csv` (สร้างขึ้นจาก ChatGPT) |
 """)
 
 st.markdown("---")
-st.caption("💡 หน้านี้รายงานการพัฒนา Ensemble Model สำหรับการทำนายโรคหัวใจ | Machine Learning Report")
+st.caption("Ensemble Model สำหรับการทำนายโรคหัวใจ ")
