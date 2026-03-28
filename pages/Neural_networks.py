@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Neural Network Model - Titanic", layout="wide")
 
-st.title("🚢 Neural Network Model (Titanic Survival)")
+st.title("Neural Network Model (Titanic Survival)")
 st.markdown("---")
 
 
@@ -121,12 +121,12 @@ titanic_steps = [
     ),
     (
         "🔹 5. การบันทึกโมเดล",
-        """บันทึกโมเดลที่ฝึกแล้วลงในไฟล์ **`.h5`** (HDF5 format) เพื่อ:
+        """บันทึกโมเดลที่ฝึกแล้วลงในไฟล์ **`pkl`** (HDF5 format) เพื่อ:
 - นำไปใช้งานทำนายผลจริง
 - ปรับปรุงหรือ Fine-tune ในอนาคต
 - แชร์ให้ทีมหรือนำ Deploy บน Production
 
->  ชื่อไฟล์: `titanic_nn_model.h5`""",
+>  ชื่อไฟล์: `titanic_nn_model.pkl`""",
     ),
 ]
 
