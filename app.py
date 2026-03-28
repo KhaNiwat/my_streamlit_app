@@ -6,7 +6,13 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("Intelligent System Project")
+col_title, col_gif = st.columns([3, 1])
+with col_title:
+    st.title("Intelligent System Project")
+    st.markdown("AI Prediction Web Application \nโมเดล Machine Learning และ Neural Networks ")
+with col_gif:
+    st.image("https://media.tenor.com/_7PZt-N6eKMAAAAi/ai-artificial-intelligence.gif", use_container_width=True)
+
 st.divider()
 
 # Section: Machine Learning
