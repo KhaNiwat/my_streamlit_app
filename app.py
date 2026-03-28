@@ -22,15 +22,15 @@ st.markdown("""
 - เพื่อเปรียบเทียบและแสดงให้เห็น **ความแตกต่างของการใช้อัลกอริทึม (Algorithm)** ในแต่ละประเภท
 
 **📚 เนื้อหาภายในเว็บไซต์:**
--**Introduction:** แนะนำอธิบายรายวิชา โครงสร้าง และวัตถุประสงค์ของการพัฒนาระบบ
--**Machine Learning Model:** อธิบายกระบวนการและรูปแบบการทำงานของโมเดลฝั่ง Machine Learning
--**Neural Network Model:** อธิบายโครงสร้างเครือข่ายประสาทเทียมและการประมวลผลของโมเดล Neural Network
+- [**Introduction**](/) – แนะนำอธิบายรายวิชา โครงสร้าง และวัตถุประสงค์ของการพัฒนาระบบ
+- [**Machine Learning Model**](Machine_Learning) – อธิบายกระบวนการและรูปแบบการทำงานของโมเดลฝั่ง Machine Learning
+- [**Neural Network Model**](Neural_networks) – อธิบายโครงสร้างเครือข่ายประสาทเทียมและการประมวลผลของโมเดล Neural Network
 """)
 
 st.divider()
 
 # Section: Machine Learning
-st.header("Machine Learning (Heart Disease)")
+st.markdown("## [🫀 Machine Learning (Heart Disease)](Machine_Learning)")
 st.markdown("ทำนายความเสี่ยงโรคหัวใจด้วยเทคนิค **Ensemble Learning**")
 
 col1, col2 = st.columns(2)
@@ -44,17 +44,15 @@ with col2:
 st.write("")
 
 # Section: Neural Networks
-st.header("Neural Networks (Titanic Survival)")
-st.markdown("ประเมินโอกาสรอดชีวิตจากเหตุการณ์ไททานิกด้วย **ANN**")
+st.markdown("## [🚢 Neural Networks (Titanic Survival)](Neural_networks)")
+st.markdown("ประเมินโอกาสรอดชีวิตจากเหตุการณ์ไททานิกด้วย **Neural Networks**")
 
 col3, col4 = st.columns(2)
 with col3:
     st.info("อธิบายโครงสร้าง Deep Learning และการจัดการ Features")
-    # แก้ไขตรงนี้ให้ตรงกับชื่อไฟล์จริง (ตรวจสอบ N ตัวใหญ่)
     st.page_link("pages/Neural_networks.py", label="ดูรายละเอียดโมเดล NN")
 with col4:
     st.warning("ทดลองจำลองข้อมูลผู้โดยสารเพื่อทำนายผล")
-    # ตรวจสอบชื่อไฟล์ Neural_networks_model.py
     st.page_link("pages/Neural_networks_model.py", label="ใช้งานโมเดล NN")
 
 st.divider()
