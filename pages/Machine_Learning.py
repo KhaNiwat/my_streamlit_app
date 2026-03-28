@@ -1,53 +1,153 @@
 import streamlit as st
 
-st.title("Machine Learning (Ensemble) Model")
+st.set_page_config(page_title="Machine Learning Model", layout="wide")
 
-st.header("Dataset & Features (ชุดข้อมูลและตัวแปร)")
-st.write("ชุดข้อมูลที่ใช้คือ `heart_dataset.csv` มีจำนวน 500 records โดยมีตัวแปร (Features) ที่เกี่ยวข้องกับสุขภาพและผลการตรวจร่างกาย ดังนี้:")
+st.title("🤖 Machine Learning (Ensemble) Model")
+st.markdown("---")
 
-st.markdown("""
-**ตัวแปรทางสถิติและข้อมูลทั่วไป (Features):**
-* **Age**: อายุของผู้ป่วย
-* **Sex**: เพศ (แปลงเป็น `Sex_Male` ผ่าน One-hot Encoding)
-* **CP (Chest Pain Type)**: ประเภทอาการเจ็บหน้าอก (แปลงเป็น `CP_atypical angina`, `CP_non-anginal pain`, `CP_typical angina`)
-* **Trestbps**: ความดันโลหิตขณะพัก (Resting blood pressure)
-* **Chol**: ระดับคอเลสเตอรอลในเลือด
-* **Thalach**: อัตราการเต้นของหัวใจสูงสุดที่ทำได้ (Maximum heart rate achieved)
 
+st.header("❤️ Heart Disease Prediction")
+
+# 1. Dataset
+st.subheader("1. รายละเอียดของ Dataset")
+st.write(
+    "Dataset ที่ใช้เป็นข้อมูลสุขภาพของผู้ป่วยจำนวน **500 ราย** "
+    "ประกอบด้วยคุณลักษณะ (Features) ที่สำคัญ ดังนี้:"
+)
+
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown("""
+**ตัวแปร Features:**
+| Feature | คำอธิบาย |
+|---------|----------|
+| **Age** | อายุของผู้ป่วย |
+| **Sex** | เพศ (Male / Female) |
+| **CP (Chest Pain)** | ประเภทของอาการเจ็บหน้าอก |
+| **Trestbps** | ความดันโลหิตขณะพัก |
+| **Chol** | ระดับคอเลสเตอรอล |
+| **Thalach** | อัตราการเต้นของหัวใจสูงสุด |
+""")
+with col2:
+    st.markdown("""
 **ตัวแปรเป้าหมาย (Target/Label):**
-* **Target**: ความเสี่ยงในการเป็นโรคหัวใจ (1 = มีความเสี่ยง, 0 = ปกติ)
+
+| ค่า | ความหมาย |
+|-----|----------|
+| **1** | เป็นโรคหัวใจ |
+| **0** | ไม่เป็นโรคหัวใจ |
+
+> 📁 Dataset: `heart_dataset.csv` (สร้างขึ้นจาก ChatGPT / UCI ML Repository concept)
 """)
 
-st.header("Data Preparation")
+st.markdown("---")
+
+# 2. Data Preparation
+st.subheader("2. ขั้นตอน Data Preparation")
 st.markdown("""
-* **Data Cleaning**: ลบคอลัมน์ที่มีค่าว่าง (Missing Values) มากกว่า 50% ออก เติมค่าว่างของข้อมูลตัวเลขด้วยค่ามัธยฐาน (Median) และข้อมูลหมวดหมู่ด้วยค่าฐานนิยม (Mode)
-* **Feature Encoding**: ทำ One-hot Encoding สำหรับตัวแปรหมวดหมู่ (drop_first=True) และแปลงชนิดข้อมูล Boolean เป็นตัวเลข 0/1
-* **Data Splitting**: แบ่งชุดข้อมูลเป็น Train 80% และ Test 20% โดยใช้ `stratify=y` เพื่อรักษาสัดส่วนของ Class ให้สมดุลกัน
+| ขั้นตอน | รายละเอียด |
+|---------|-----------|
+| **Handling Missing Values** | ตรวจสอบและจัดการค่าที่หายไป — เติมค่า **Median** สำหรับข้อมูลตัวเลข และ **Mode** สำหรับข้อมูลหมวดหมู่ |
+| **Feature Selection** | ลบคอลัมน์ที่มีข้อมูลขาดหายมากกว่า **50%** ออก |
+| **Data Transformation** | ทำ **One-hot Encoding** เพื่อแปลงข้อมูลหมวดหมู่ให้เป็นตัวเลข และใช้ **StandardScaler** สำหรับโมเดลที่ไวต่อสเกลข้อมูล (เช่น Logistic Regression) |
+| **Data Splitting** | แบ่งชุดข้อมูลเป็น Train / Validation / Test ในสัดส่วน **80:10:10** หรือ **80:20** ตามลำดับการทดลอง โดยใช้ `stratify=y` รักษาสัดส่วน Class |
 """)
 
-st.header("Ensemble Concept")
-st.markdown("""
-โมเดลนี้ใช้เทคนิค **Ensemble Learning** ชนิด **Voting Classifier (Soft Voting)** 
-หลักการคือการนำผลลัพธ์ที่เป็น *ค่าความน่าจะเป็น (Probability)* จากโมเดลย่อยหลายๆ ตัวมาเฉลี่ยรวมกัน จากนั้นจึงตัดสินใจเลือก Class ที่มีค่าเฉลี่ยความน่าจะเป็นสูงสุด วิธีนี้ช่วยลดความผันผวนและเพิ่มความแม่นยำได้ดีกว่าการใช้โมเดลเดียว
+st.markdown("---")
+
+# 3. Ensemble Concept
+st.subheader("3. แนวคิดของ Ensemble Model")
+
+col3, col4 = st.columns([2, 1])
+with col3:
+    st.markdown("""
+**Ensemble Learning** คือเทคนิคการนำโมเดลหลายๆ ตัวมารวมพลังกันเพื่อทำนายผลลัพธ์ โดยมีจุดประสงค์เพื่อ:
+- ลด **Bias** และ **Variance**
+- เพิ่มความแม่นยำให้สูงกว่าการใช้โมเดลเพียงตัวเดียว
+
+ในโปรเจกต์นี้ใช้เทคนิค **Soft Voting** ซึ่งเป็นการนำ **ค่าความน่าจะเป็น (Probability)** 
+จากหลายโมเดลมาเฉลี่ยกัน แล้วเลือก Class ที่มีค่าเฉลี่ยสูงสุดเป็นผลลัพธ์สุดท้าย
+""")
+with col4:
+    st.info("""
+**Voting Types:**
+- 🔵 **Hard Voting**: โหวตโดยตรงจากผล Class
+- 🟢 **Soft Voting**: เฉลี่ย Probability (ใช้ในโปรเจกต์นี้)
 """)
 
-st.header("Models Used")
-st.markdown("""
-โมเดลย่อย (Estimators) ที่นำมาต่อรวมกัน มีทั้งหมด 3 ตัว ได้แก่:
-1. **Logistic Regression**: ใช้งานร่วมกับ `StandardScaler` ในรูปแบบ Pipeline เพื่อปรับสเกลข้อมูลก่อนเทรน (กำหนด `max_iter=1000`)
-2. **Random Forest Classifier**: โมเดลแบบต้นไม้ตัดสินใจหลายต้น (กำหนด `n_estimators=200`, `max_depth=5`)
-3. **Gradient Boosting Classifier**: โมเดลที่เรียนรู้จากข้อผิดพลาดของรอบก่อนหน้า (กำหนด `n_estimators=200`, `learning_rate=0.05`, `max_depth=3`)
+st.markdown("---")
+
+# 4. Models Used
+st.subheader("4. โมเดลที่ใช้พัฒนา (อย่างน้อย 3 ตัว)")
+
+col5, col6, col7 = st.columns(3)
+
+with col5:
+    st.markdown("""
+### 📊 Logistic Regression
+โมเดลพื้นฐานสำหรับการจำแนกประเภทเชิงเส้น
+
+**พารามิเตอร์:**
+- `max_iter = 1000`
+- ใช้ร่วมกับ `StandardScaler` ใน Pipeline
+
+**ข้อดี:** เรียบง่าย, ตีความได้ง่าย, ทำงานได้ดีกับข้อมูลเชิงเส้น
 """)
 
-st.header("Development Steps")
-st.markdown("""
-* **Train Base Models**: ฝึกสอนและวัดผลโมเดลเดี่ยวทีละตัวเพื่อเป็น Baseline (Logistic Regression = 64.0%, Random Forest = 72.0%, Gradient Boosting = 72.0%)
-* **Train Ensemble**: สร้างและฝึกสอน `VotingClassifier` ด้วยโมเดลย่อยทั้ง 3 ตัว
-* **Evaluate**: ประเมินผลลัพธ์บนชุดข้อมูล Test ได้ค่า Accuracy ของ Ensemble ที่ **70.0%** และมีการเปรียบเทียบประสิทธิภาพด้วย **ROC Curve** และค่า **AUC**
-* **Export Model**: บันทึกโมเดลด้วยไลบรารี `joblib` เป็นไฟล์ `heart_model.pkl` เพื่อนำไปใช้งานต่อ
+with col6:
+    st.markdown("""
+### 🌲 Random Forest
+โมเดลแบบ Ensemble (Bagging) ที่ใช้ Decision Trees หลายต้น
+
+**พารามิเตอร์:**
+- `n_estimators = 200`
+- `max_depth = 5`
+
+**ข้อดี:** ลด Overfitting ได้ดี, ทนทานต่อ Outlier
 """)
 
-st.header("References (แหล่งอ้างอิง)")
-st.markdown("""
-Dataset: heart_dataset สร้างขึ้นจาก chatgpt
+with col7:
+    st.markdown("""
+### 🚀 Gradient Boosting
+โมเดลแบบ Ensemble (Boosting) ที่สร้างโมเดลใหม่เพื่อแก้ข้อผิดพลาดก่อนหน้า
+
+**พารามิเตอร์:**
+- `n_estimators = 200`
+- `learning_rate = 0.05`
+- `max_depth = 3`
+
+**ข้อดี:** Accuracy สูง, จัดการ Non-linear ได้ดี
 """)
+
+st.markdown("---")
+
+# 5. Development Steps
+st.subheader("5. ขั้นตอนการพัฒนาโมเดล")
+
+steps = {
+    "🔹 Base Modeling": "ฝึกสอนโมเดลพื้นฐานทีละตัวเพื่อดูประสิทธิภาพเริ่มต้น (Baseline) — LR = 64.0%, RF = 72.0%, GB = 72.0%",
+    "🔹 Hyperparameter Tuning": "ใช้ **GridSearchCV** เพื่อค้นหาค่าพารามิเตอร์ที่ดีที่สุดสำหรับ Random Forest และ Gradient Boosting โดยเน้นเพิ่มค่า **F1-Score**",
+    "🔹 Ensemble Integration": "รวมโมเดลที่ผ่านการจูนแล้วทั้ง 3 ตัวเข้าด้วยกันผ่าน **VotingClassifier** (Soft Voting)",
+    "🔹 Evaluation": "ประเมินผลด้วย **Accuracy**, **F1-Score** และ **ROC Curve** เพื่อเปรียบเทียบประสิทธิภาพ — Ensemble Accuracy = **70.0%**",
+    "🔹 Export Model": "บันทึกโมเดลด้วย `joblib` เป็นไฟล์ `heart_model.pkl` เพื่อนำไปใช้งานต่อ",
+}
+
+for step, desc in steps.items():
+    with st.expander(step):
+        st.markdown(desc)
+
+st.markdown("---")
+
+# 6. References
+st.subheader("6. แหล่งอ้างอิง (References)")
+st.markdown("""
+| แหล่งอ้างอิง | ลิงก์ |
+|-------------|------|
+| 📚 Scikit-learn Documentation | [scikit-learn.org](https://scikit-learn.org/) |
+| 📊 Pandas Library | [pandas.pydata.org](https://pandas.pydata.org/) |
+| 🔬 UCI ML Repository / Kaggle | Machine Learning Concepts & Heart Disease Dataset |
+| 🤖 Dataset | `heart_dataset.csv` (สร้างขึ้นจาก ChatGPT) |
+""")
+
+st.markdown("---")
+st.caption("💡 หน้านี้รายงานการพัฒนา Ensemble Model สำหรับการทำนายโรคหัวใจ | Machine Learning Report")
