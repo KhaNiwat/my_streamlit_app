@@ -2,7 +2,6 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Intelligent System Project",
-    page_icon=" ",
     layout="wide"
 )
 
@@ -22,33 +21,37 @@ st.markdown("""
 - เพื่อเปรียบเทียบและแสดงให้เห็น **ความแตกต่างของการใช้อัลกอริทึม (Algorithm)** ในแต่ละประเภท
 
 **📚 เนื้อหาภายในเว็บไซต์:**
-- [**Introduction**](/) – แนะนำอธิบายรายวิชา โครงสร้าง และวัตถุประสงค์ของการพัฒนาระบบ
-- [**Machine Learning Model**](Machine_Learning) – อธิบายกระบวนการและรูปแบบการทำงานของโมเดลฝั่ง Machine Learning
-- [**Neural Network Model**](Neural_networks) – อธิบายโครงสร้างเครือข่ายประสาทเทียมและการประมวลผลของโมเดล Neural Network
+- **Introduction** – แนะนำอธิบายรายวิชา โครงสร้าง และวัตถุประสงค์ของการพัฒนาระบบ
+- **Machine Learning Model** – อธิบายกระบวนการและรูปแบบการทำงานของโมเดลฝั่ง Machine Learning
+- **Neural Network Model** – อธิบายโครงสร้างเครือข่ายประสาทเทียมและการประมวลผลของโมเดล Neural Network
 """)
 
 st.divider()
 
-# Section: Machine Learning
-st.markdown("## [🫀 Machine Learning (Heart Disease)](Machine_Learning)")
-st.markdown("ทำนายความเสี่ยงโรคหัวใจด้วยเทคนิค **Ensemble Learning**")
+col_ml, col_nn = st.columns(2)
 
-st.page_link("pages/Machine_Learning.py", label="อธิบายทฤษฎีและขั้นตอนการเตรียมข้อมูล", icon="📖")
-st.page_link("pages/Machine_Learning_Models.py", label="ทดลองใช้งานระบบทำนายผลจริง", icon="⚙️")
+with col_ml:
+    # Section: Machine Learning
+    st.markdown("## 🫀 Machine Learning")
+    st.markdown("**Heart Disease Prediction**")
+    st.markdown("ทำนายความเสี่ยงโรคหัวใจด้วยเทคนิค **Ensemble Learning**")
+    st.write("")
+    st.page_link("pages/Machine_Learning.py", label="อธิบายทฤษฎีและขั้นตอนเตรียมข้อมูล", icon="📖")
+    st.page_link("pages/Machine_Learning_Models.py", label="ทดลองใช้งานระบบทำนายผลจริง", icon="⚙️")
 
-st.write("")
-
-# Section: Neural Networks
-st.markdown("## [🚢 Neural Networks (Titanic Survival)](Neural_networks)")
-st.markdown("ประเมินโอกาสรอดชีวิตจากเหตุการณ์ไททานิกด้วย **Neural Networks**")
-
-st.page_link("pages/Neural_networks.py", label="อธิบายโครงสร้าง Deep Learning และการจัดการ Features", icon="📖")
-st.page_link("pages/Neural_networks_model.py", label="ทดลองจำลองข้อมูลผู้โดยสารเพื่อทำนายผล", icon="⚙️")
+with col_nn:
+    # Section: Neural Networks
+    st.markdown("## 🚢 Neural Networks")
+    st.markdown("**Titanic Survival Prediction**")
+    st.markdown("ประเมินโอกาสรอดชีวิตจากเหตุการณ์ไททานิกด้วย **Neural Networks**")
+    st.write("")
+    st.page_link("pages/Neural_networks.py", label="อธิบายโครงสร้างและการจัดการ Features", icon="📖")
+    st.page_link("pages/Neural_networks_model.py", label="ทดลองจำลองข้อมูลเพื่อทำนายผล", icon="⚙️")
 
 st.divider()
 
 # --- About Us Section ---
-st.header("ผู้จัดทำ (About Us)")
+st.header("👨‍💻 ผู้จัดทำ (About Us)")
 col_a, col_b = st.columns(2)
 
 with col_a:
@@ -63,5 +66,4 @@ with col_b:
     st.markdown("""
 **อาจารย์ผู้สอนและที่ปรึกษา:**
 - ดร.ณัฐกิตติ์ จิตรเอื้อตระกูล (NJR)
-- ดร.ธรรศฏภณ สุระศักดิ์ (TSR)
 """)
