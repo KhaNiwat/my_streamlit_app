@@ -11,7 +11,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# ซ่อนแถบ Sidebar เดิมของ Streamlit
+# ปรับแต่ง CSS หลักของเว็บไซต์ (ซ่อน Sidebar และปรับความกว้าง/ระยะขอบ)
 st.markdown("""
     <style>
         [data-testid="collapsedControl"] {
@@ -19,6 +19,22 @@ st.markdown("""
         }
         [data-testid="stSidebar"] {
             display: none;
+        }
+        /* ปรับความกว้างหน้าจอและความสูงด้านบน-ล่างให้กระชับขึ้น */
+        .block-container {
+            max-width: 1300px !important;
+            padding-top: 2rem !important;
+            padding-bottom: 2rem !important;
+        }
+        /* ทำให้แถบเมนู Option Menu ล็อกติดอยู่ด้านบนสุดเวลาเลื่อนจอ (Sticky Header) */
+        div[data-testid="stElementContainer"]:has(iframe[title="streamlit_option_menu.option_menu"]) {
+            position: sticky;
+            top: 2.5rem; /* ระยะห่างจากขอบบนสุดตอนเลื่อน */
+            z-index: 999; /* ให้อยู่เลเยอร์บนสุด */
+            background-color: var(--background-color); /* เปลี่ยนสีพื้นหลังรองรับทั้ง Light และ Dark Mode อัตโนมัติ */
+            padding-top: 10px;
+            padding-bottom: 15px;
+            margin-top: -10px;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -34,19 +50,24 @@ selected = option_menu(
     default_index=0,
     orientation="horizontal",
     styles={
-        "container": {"padding": "0!important", "background-color": "transparent"},
-        "icon": {"color": "white", "font-size": "14px"}, 
+        "container": {
+            "padding": "0!important", 
+            "background-color": "transparent",
+            "max-width": "100%"
+        },
+        "icon": {"font-size": "14px"}, 
         "nav-link": {
             "font-size": "14px", 
             "text-align": "center", 
             "margin":"0px", 
-            "color": "white"
+            "padding": "10px",
+            "white-space": "nowrap"
         },
         "nav-link-selected": {
             "background-color": "transparent", 
-            "color": "#ff4b4b", 
+            "color": "#e03131", 
             "font-weight": "bold", 
-            "border-bottom": "2px solid #ff4b4b", 
+            "border-bottom": "2px solid #e03131", 
             "border-radius": "0px"
         },
     }
@@ -59,18 +80,17 @@ if selected == "Home":
     st.header("📖 บทนำ (Introduction)")
     st.markdown("""
     **รายวิชา Intelligent System (040613701)**  
-    เว็บไซต์นี้เป็นส่วนหนึ่งของการศึกษาวิชาระบบอัจฉริยะ (Intelligent System) ซึ่งมุ่งเน้นการศึกษาหลักการพื้นฐาน ตลอดจนการประยุกต์ใช้ **Machine Learning** และ **Neural Network** เพื่อแก้ปัญหาและวิเคราะห์ข้อมูลจากสถานการณ์ในโลกความเป็นจริง
+    เว็บไซต์นี้เป็นส่วนหนึ่งของการศึกษาวิชาระบบอัจฉริยะ (Intelligent System) ซึ่งมุ่งเน้นการศึกษาหลักการพื้นฐาน ตลอดจนการประยุกต์ใช้ **Machine Learning** และ **Neural Network**
 
     **🎯 จุดประสงค์ของเว็บไซต์:**
     - เพื่อเสริมสร้างความเข้าใจใน **ขั้นตอนการพัฒนาโมเดล AI**
-    - เพื่ออธิบายทฤษฎีและแนวคิดพื้นฐานเบื้องหลังของศาสตร์ Machine Learning และ Neural Network
-    - เพื่อสาธิตกลไกและทดลองใช้งาน **ระบบพยากรณ์จริง** ให้เห็นความสามารถของตัวแบบทั้งสองแขนง
-    - เพื่อเปรียบเทียบและแสดงให้เห็น **ความแตกต่างของการใช้อัลกอริทึม (Algorithm)** ในแต่ละประเภท
+    - เพื่ออธิบายทฤษฎีและแนวคิดพื้นฐานเบื้องต้น Machine Learning และ Neural Network
+    - เพื่อสาธิตการทำนายผลของโมเดล
 
     **📚 เนื้อหาภายในเว็บไซต์:**
     - **Introduction** – แนะนำอธิบายรายวิชา โครงสร้าง และวัตถุประสงค์ของการพัฒนาระบบ
-    - **Machine Learning Model** – อธิบายกระบวนการและรูปแบบการทำงานของโมเดลฝั่ง Machine Learning
-    - **Neural Network Model** – อธิบายโครงสร้างเครือข่ายประสาทเทียมและการประมวลผลของโมเดล Neural Network
+    - **Machine Learning Model** – อธิบายกระบวนการและรูปแบบการทำงานของ Machine Learning
+    - **Neural Network Model** – อธิบายกระบวนการและรูปแบบการทำงานของ Neural Network
     """)
 
     st.divider()
@@ -84,7 +104,8 @@ if selected == "Home":
     **จัดทำโดย:**
     - **นายนิวัฒน์ เสียงใส**
     - รหัสนักศึกษา: 6404062610294
-    - DE-RA ชั้นปีที่ 5
+    - ห้อง : DE-RA 
+    - ชั้นปีที่ : 5
     """)
 
     with col_b:
