@@ -6,17 +6,12 @@ st.set_page_config(
 )
 
 st.title("Intelligent System Project")
-st.divider()
-col1, col2, col3, col4 = st.columns(4)
-with col1:
-    st.page_link("pages/Machine_Learning.py", label="ML Heart Disease", icon="📖")
-with col2:
-    st.page_link("pages/Machine_Learning_Models.py", label="ML Heart Disease Model", icon="⚙️")
-with col3:
-    st.page_link("pages/Neural_networks.py", label="NN Titanic Survival", icon="📖")
-with col4:
-    st.page_link("pages/Neural_networks_model.py", label="NN Titanic Survival Model", icon="⚙️")
-st.divider()
+
+from navigation import render_nav_bar
+render_nav_bar("Home")
+
+
+
 
 st.header("📖 บทนำ (Introduction)")
 st.markdown("""

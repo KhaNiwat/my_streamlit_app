@@ -1,6 +1,12 @@
+import sys
+import os
 import streamlit as st
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from navigation import render_nav_bar
+
 st.set_page_config(page_title="Neural Network Model - Titanic", layout="wide")
+render_nav_bar("NN Titanic")
 
 st.title("Neural Network Model (Titanic Survival)")
 st.markdown("---")

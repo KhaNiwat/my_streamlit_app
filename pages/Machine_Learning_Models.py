@@ -1,7 +1,15 @@
+import sys
+import os
 import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from navigation import render_nav_bar
+
+st.set_page_config(page_title="ML Heart Disease Model", layout="wide")
+render_nav_bar("ML Heart Model")
 
 st.title("Machine_Learning (Heart Disease)")
 

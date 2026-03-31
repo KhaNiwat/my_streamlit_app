@@ -1,9 +1,16 @@
+import sys
 import os
 import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
 from sklearn.preprocessing import StandardScaler
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from navigation import render_nav_bar
+
+st.set_page_config(page_title="NN Titanic Model", layout="wide")
+render_nav_bar("NN Titanic Model")
 
 st.title("Neural Network (Titanic)")
 

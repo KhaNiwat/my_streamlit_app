@@ -1,6 +1,12 @@
+import sys
+import os
 import streamlit as st
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from navigation import render_nav_bar
+
 st.set_page_config(page_title="Machine Learning Model", layout="wide")
+render_nav_bar("ML Heart Disease")
 
 st.title(" Machine Learning (Ensemble) Model")
 st.markdown("---")
