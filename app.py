@@ -39,8 +39,6 @@ st.divider()
 
 
 
-st.divider()
-
 # --- About Us Section ---
 st.header("👨‍💻 ผู้จัดทำ (About Us)")
 col_a, col_b = st.columns(2)
