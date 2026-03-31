@@ -7,7 +7,16 @@ st.set_page_config(
 
 st.title("Intelligent System Project")
 st.divider()
-
+col1, col2, col3, col4 = st.columns(4)
+with col1:
+    st.page_link("pages/Machine_Learning.py", label="ML Heart Disease", icon="📖")
+with col2:
+    st.page_link("pages/Machine_Learning_Models.py", label="ML Heart Disease Model", icon="⚙️")
+with col3:
+    st.page_link("pages/Neural_networks.py", label="NN Titanic Survival", icon="📖")
+with col4:
+    st.page_link("pages/Neural_networks_model.py", label="NN Titanic Survival Model", icon="⚙️")
+st.divider()
 
 st.header("📖 บทนำ (Introduction)")
 st.markdown("""
@@ -28,25 +37,7 @@ st.markdown("""
 
 st.divider()
 
-col_ml, col_nn = st.columns(2)
 
-with col_ml:
-    # Section: Machine Learning
-    st.markdown("## 🫀 Machine Learning")
-    st.markdown("**Heart Disease Prediction**")
-    st.markdown("ทำนายความเสี่ยงโรคหัวใจด้วยเทคนิค **Ensemble Learning**")
-    st.write("")
-    st.page_link("pages/Machine_Learning.py", label="อธิบายทฤษฎีและขั้นตอนเตรียมข้อมูล", icon="📖")
-    st.page_link("pages/Machine_Learning_Models.py", label="ทดลองใช้งานระบบทำนายผลจริง", icon="⚙️")
-
-with col_nn:
-    # Section: Neural Networks
-    st.markdown("## 🚢 Neural Networks")
-    st.markdown("**Titanic Survival Prediction**")
-    st.markdown("ประเมินโอกาสรอดชีวิตจากเหตุการณ์ไททานิกด้วย **Neural Networks**")
-    st.write("")
-    st.page_link("pages/Neural_networks.py", label="อธิบายโครงสร้างและการจัดการ Features", icon="📖")
-    st.page_link("pages/Neural_networks_model.py", label="ทดลองจำลองข้อมูลเพื่อทำนายผล", icon="⚙️")
 
 st.divider()
 
